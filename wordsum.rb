@@ -1,0 +1,36 @@
+require_relative 'DigitalScript'
+logic %{
+Time 32
+Input A1 2 1
+Input A2 4 2
+Input A3 8 4
+Input A4 16 8
+Input_ B1 0 1
+Input_ B2 1 1
+Input_ B3 1 1
+Input_ B4 0
+Var S1 XOR A1 B1
+Var C1 AND A1 B1
+
+Var XAB2 XOR A2 B2
+Var S2 XOR XAB2 C1
+Var CNXAB2 AND XAB2 C1
+Var ANDAB2 AND A2 B2
+Var C2 OR CNXAB2 ANDAB2
+
+Var XAB3 XOR A3 B3
+Var S3 XOR XAB3 C2
+Var CNXAB3 AND XAB3 C2
+Var ANDAB3 AND A3 B3
+Var C3 OR CNXAB3 ANDAB3
+
+Var XAB4 XOR A4 B4
+Var S4 XOR XAB4 C3
+Var CNXAB4 AND XAB4 C3
+Var ANDAB4 AND A4 B4
+Var C4 OR CNXAB4 ANDAB4
+
+Var S5 AND C4
+Plot A1 A2 A3 A4 B1 B2 B3 B4 S1 S2 S3 S4 S5 
+}
+run "wordsum"

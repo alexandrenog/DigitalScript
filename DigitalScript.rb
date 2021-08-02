@@ -9,11 +9,11 @@ def get_signals text, time
 	vectors = text.select{|l| /input_/.match l}.map{|l| l.slice((l.index(' ')+1)...l.size)}
 	input_objs=[]
 	inputs.each do |inp|
-		name, period, dutyc = inp.split(" ")
+		name, period, dutyc = inp.split(" ") # HOW PERIODIC 2-state INPUTS ARE READ
 		period, dutyc = period.to_i, dutyc.to_i
-		input_objs<<{"name"=>name,"period"=>period,"dutyc"=>dutyc,"signal"=>Array.new(period){|i| i<dutyc}}		
+		input_objs<<{"name"=>name,"period"=>period,"dutyc"=>dutyc,"signal"=>Array.new(period){|i| i>=period-dutyc}}		
 	end
-	vectors.each do |vec|
+	vectors.each do |vec| # HOW PRE-DETERMINED INPUTS_ ARE READ
 		name, *values = vec.split(" ")
 		period, values = values.size, values.map{|v| v.to_i == 1}
 		input_objs<<{"name"=>name,"period"=>period,"signal"=>values}	
@@ -100,7 +100,7 @@ def process_expressions signals, expressions, total_time
 	 				vars<<sig[0]["signal"][tick] 
 	 			else
 	 				exp_var=expressions.select{|e| e["name"].eql?var_name}[0]
-	 				if(tick==0)
+	 				if(tick==0 and expressions.index(exp_var)>=expressions.index(exp))
 	 					vars<<exp_var["initial_value"]
 	 				else
 	 					tck = (expressions.index(exp_var)<expressions.index(exp))?(tick):(tick-1)
@@ -118,29 +118,40 @@ def create_image inputs, expressions, time, plots, file_name="image"
 		inputs[0].select!{|input| plots.include? input["name"]}
 		expressions.select!{|exp| plots.include? exp["name"]}
 	end
-	width, height = 820, 20+70*(inputs[0].size+expressions.size)
-	png = ChunkyPNG::Image.new(width, height, ChunkyPNG::Color.from_hex('#9fA75f'))
+	width = 1620
+	step=1600.0/time
+	gap = 12
+	tile_height=gap+(step*2).to_i
+	height = gap+tile_height*(inputs[0].size+expressions.size)
+	if(height>width)
+		tile_height=gap+step.to_i
+		height = gap+tile_height*(inputs[0].size+expressions.size)
+	end
+	png = ChunkyPNG::Image.new(width, height, ChunkyPNG::Color.from_hex('#00995c'))
 	red = ChunkyPNG::Color.from_hex('#df2f2f')
 	blue = ChunkyPNG::Color.from_hex('#2f2fdf')
 	white = ChunkyPNG::Color.from_hex('#dfdfdf')
+	grey = ChunkyPNG::Color.from_hex('#262626')
 	black = ChunkyPNG::Color::BLACK
-	step=800/time
 	inputs[0].each_with_index{|inp,index|
 		inp["signal"].each_with_index{|value,tick|
 			color=(value)?(red):(white)
-			png.rect(10+tick*step, 20+index*70, 10+(tick+1)*step, 20+(index)*70+50,color,color)
+			png.rect(10+(tick*step).to_i, gap+index*tile_height, (10+(tick+1)*step).to_i, (index+1)*tile_height,color,color)
 		}
 	}
-	height_gap=70*(inputs[0].size)
+	height_gap=tile_height*(inputs[0].size)
 	expressions.each_with_index{|exp,index|
 		exp["signal"].each_with_index{|value,tick|
 			color=(value)?(blue):(white)
-			png.rect(10+tick*step,     20+index*70+height_gap, 
-				     10+(tick+1)*step, 20+(index)*70+50+height_gap,color,color)
+			png.rect(10+(tick*step).to_i,     gap+index*tile_height+height_gap, 
+				     10+((tick+1)*step).to_i, (index+1)*tile_height+height_gap,color,color)
 		}
 	}
 	(time+1).times do  |t|
-		png.line(10+t*step, 0, 10+t*step, height, black)
+		png.line(10+(t*step).to_i, 0, 10+(t*step).to_i, height, black)
+	end
+	if !inputs[0].empty? and !expressions.empty?
+		png.rect(0, inputs[0].size*tile_height, width, inputs[0].size*tile_height+gap, grey,grey)
 	end
 	png.save(file_name+'.png', :interlace => true)
 
