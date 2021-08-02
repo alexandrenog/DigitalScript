@@ -2,7 +2,7 @@ require 'chunky_png'
 
 $lines=[]
 def logic source
-	$lines=source.split("\n").map{|e| e.chomp.downcase}.select!{|e| !e.eql?("")}
+	$lines=source.split("\n").map{|e| e.chomp.strip.downcase}.select!{|e| !e.eql?("")}
 end
 def get_signals text, time
 	inputs = text.select{|l| /input /.match l}.map{|l| l.slice((l.index(' ')+1)...l.size)}

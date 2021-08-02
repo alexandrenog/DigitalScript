@@ -34,6 +34,6 @@ Input B 4 2
 Var AndAB AND A B
 Plot A B AndAB
 }
-run "wordsum"
+run "nome_imagem_do_exemplo"
 </pre>
 Executar: ruby exemplo.rb <br />
