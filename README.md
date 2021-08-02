@@ -24,7 +24,8 @@ Tempo auto definido pela máquina como o mínimo múltiplo comum dos períodos d
 Tempo predefinido <br />
 &emsp;	Time <b>Valor</b> <br />
 # Exemplo
-<code>
+exemplo.rb:
+<pre>
 require_relative 'DigitalScript' <br />
 logic %{ <br />
 Time 0 <br />
@@ -34,4 +35,5 @@ Var AndAB AND A B <br />
 Plot A B AndAB <br />
 } <br />
 run "wordsum"
-</code>
+</pre>
+Executar: ruby exemplo.rb <br />
