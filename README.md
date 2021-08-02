@@ -23,7 +23,7 @@ Tempo auto definido pela máquina como o mínimo múltiplo comum dos períodos d
 &emsp; 	Time 0 <br />
 Tempo predefinido <br />
 &emsp;	Time <b>Valor</b> <br />
-#Exemplo
+# Exemplo
 <code>
 require_relative 'DigitalScript' <br />
 logic %{ <br />
