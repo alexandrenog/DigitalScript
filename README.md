@@ -26,7 +26,7 @@ Tempo predefinido <br />
 # Exemplo
 exemplo.rb:
 <pre>
-require_relative 'DigitalScript' <br />
+require_relative 'DigitalScript'
 logic %{ 
 Time 0 
 Input A 2 1 
