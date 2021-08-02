@@ -7,18 +7,18 @@ Instalar o ChunkyPng: '[sudo] gem install chunky_png'.
 # Sintaxe
 Todo o código pode estar em letras maiusculas ou minusculas. <br />
 Sinais de Entrada periódicos: <br />
-	Input &lt;nome&gt; &lt;periodo&gt; &lt;duty-cicle&gt; <br />
+	Input <b>nome</b> <b>periodo</b> <b>duty-cicle</b> <br />
 Sinais de Entrada predefinidos: <br />
-	Input_ &lt;nome&gt; &lt;Valor1&gt; &lt;Valor2&gt; &lt;Valor3&gt; &lt;Valor4&gt; ... <br />
+	Input_ <b>nome</b> <b>Valor1</b> <b>Valor2</b> <b>Valor3</b> <b>Valor4</b> ... <br />
 Valores: <br />
 	1 ou 0 <br />
 Expressões: <br />
-	Var &lt;nome&gt; &lt;operaçao&gt; &lt;nome1&gt; &lt;nome2&gt; ... <br />
+	Var <b>nome</b> <b>operaçao</b> <b>nome1</b> <b>nome2</b> ... <br />
 Operações: <br />
 	not, and, or, xor, nand, nor <br />
 Saídas a desenhar: <br />
-	Plot &lt;nome1&gt; &lt;nome2&gt; ... <br />
+	Plot <b>nome1</b> <b>nome2</b> ... <br />
 Tempo auto definido pela máquina como o mínimo múltiplo comum dos periódos dos sinais: <br />
  	Time 0 <br />
-Tempo definido <br />
-	Time &lt;Valor&gt; <br />
+Tempo predefinido <br />
+	Time <b>Valor</b> <br />
