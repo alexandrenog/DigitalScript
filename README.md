@@ -27,13 +27,13 @@ Tempo predefinido <br />
 exemplo.rb:
 <pre>
 require_relative 'DigitalScript' <br />
-logic %{ <br />
-Time 0 <br />
-Input A 2 1 <br />
-Input B 4 2 <br />
-Var AndAB AND A B <br />
-Plot A B AndAB <br />
-} <br />
+logic %{ 
+Time 0 
+Input A 2 1 
+Input B 4 2
+Var AndAB AND A B
+Plot A B AndAB
+}
 run "wordsum"
 </pre>
 Executar: ruby exemplo.rb <br />
