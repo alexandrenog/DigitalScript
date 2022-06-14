@@ -97,7 +97,7 @@ def process_expressions signals, expressions, total_time
 	 		exp["input_vars"].each{|var_name|
 	 			sig=signals[0].select{|e| e["name"].eql?var_name}
 	 			if(sig[0]!=nil)
-	 				vars<<sig[0]["signal"][tick] 
+	 				vars << sig[0]["signal"][tick] 
 	 			else
 	 				exp_var=expressions.select{|e| e["name"].eql?var_name}[0]
 	 				if(tick==0 and expressions.index(exp_var)>=expressions.index(exp))
