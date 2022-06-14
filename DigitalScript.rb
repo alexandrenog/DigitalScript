@@ -101,15 +101,15 @@ def process_expressions signals, expressions, total_time
 	 			else
 	 				exp_var=expressions.select{|e| e["name"].eql?var_name}[0]
 	 				if(tick==0 and expressions.index(exp_var)>=expressions.index(exp))
-	 					vars<<exp_var["initial_value"]
+	 					vars << exp_var["initial_value"]
 	 				else
 	 					tck = (expressions.index(exp_var)<expressions.index(exp))?(tick):(tick-1)
-	 					vars<<exp_var["signal"][tck]
+	 					vars << exp_var["signal"][tck]
 	 				end
 	 			end
 	 		}
 	 		value = exp["operation"].call(*vars)
-	 		exp["signal"]<<value
+	 		exp["signal"] << value
 	 	end
 	 end
 end
